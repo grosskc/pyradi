@@ -4480,17 +4480,18 @@ def RGBToPyCmap(rgbdata):
 
     return mpl_data
 
-# register turbo as a matplotlib colourmap
-mpl_data = RGBToPyCmap(turbo_colormap_data)
-# plt.register_cmap(name='turbo', data=mpl_data, lut=turbo_colormap_data.shape[0])
-# plt.register_cmap(cmap=LSC(name='turbo', data=mpl_data, lut=turbo_colormap_data.shape[0]))
-plt.register_cmap(cmap=LSC('turbo', mpl_data, turbo_colormap_data.shape[0]))
-mpl_data = RGBToPyCmap(np.flipud(turbo_colormap_data))
-# plt.register_cmap(name='iturbo', data=mpl_data, lut=turbo_colormap_data.shape[0])
-# plt.register_cmap(cmap=LSC(name='iturbo', data=mpl_data, lut=turbo_colormap_data.shape[0]))
-plt.register_cmap(cmap=LSC('iturbo', mpl_data, turbo_colormap_data.shape[0]))
-# usage:
-# plt.imshow(ZZ, cmap='turbo')
+# register turbo as a matplotlib colourmap for matplotlib versions below 3.3
+if float(mpl.__version__[:3]) < 3.3:
+    mpl_data = RGBToPyCmap(turbo_colormap_data)
+    # plt.register_cmap(name='turbo', data=mpl_data, lut=turbo_colormap_data.shape[0])
+    # plt.register_cmap(cmap=LSC(name='turbo', data=mpl_data, lut=turbo_colormap_data.shape[0]))
+    plt.register_cmap(cmap=LSC('turbo', mpl_data, turbo_colormap_data.shape[0]))
+    mpl_data = RGBToPyCmap(np.flipud(turbo_colormap_data))
+    # plt.register_cmap(name='iturbo', data=mpl_data, lut=turbo_colormap_data.shape[0])
+    # plt.register_cmap(cmap=LSC(name='iturbo', data=mpl_data, lut=turbo_colormap_data.shape[0]))
+    plt.register_cmap(cmap=LSC('iturbo', mpl_data, turbo_colormap_data.shape[0]))
+    # usage:
+    # plt.imshow(ZZ, cmap='turbo')
 
 ################################################################
 ################################################################
